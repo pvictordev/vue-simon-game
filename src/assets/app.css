@@ -1,0 +1,44 @@
+.simon-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+  grid-gap: 20px;
+}
+
+.button {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 2px solid #333;
+}
+
+.button-0 {
+  background-color: red;
+}
+
+.button-1 {
+  background-color: green;
+}
+
+.button-2 {
+  background-color: blue;
+}
+
+.button-3 {
+  background-color: yellow;
+}
+
+.game-over {
+  margin-top: 20px;
+  font-size: 24px;
+  color: red;
+}
