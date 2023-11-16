@@ -1,5 +1,18 @@
 <template>
   <div class="simon-game">
+    <div class="header">
+      <p class="level">Уровень: {{ level }}</p>
+      <h1 class="title">Simon The Game</h1>
+      <div class="difficulty">
+        <p>Сложность:</p>
+        <select class="difficulty-buttons">
+          <option class="easy">Легко</option>
+          <option class="normal">Нормально</option>
+          <option class="hard">Сложно</option>
+        </select>
+      </div>
+    </div>
+
     <div class="buttons">
       <div
         v-for="(button, index) in buttons"
@@ -9,8 +22,9 @@
         @click="handleButtonClick(index)"
       ></div>
     </div>
-    <button @click="startGame">Start Game</button>
-    <div v-if="gameOver" class="game-over">Game Over!</div>
+
+    <button class="start-game" @click="startGame">Начать игру</button>
+    <div v-if="gameOver" class="game-over">Провал!</div>
   </div>
 </template>
 
@@ -80,6 +94,4 @@ export default {
 }
 </script>
 
-<style src="./assets/app.css">
-
-</style>
+<style src="./assets/app.css"></style>
