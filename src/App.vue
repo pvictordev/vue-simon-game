@@ -4,8 +4,8 @@
       <p class="level">Уровень: {{ level }}</p>
       <h1 class="title">Simon The Game</h1>
       <div class="difficulty">
-        <p>Сложность:</p>
-        <select class="difficulty-buttons">
+        <p>Сложность: {{ selectedDifficulty }}</p>
+        <select class="difficulty-buttons" v-model="selectedDifficulty">
           <option class="easy">Легко</option>
           <option class="normal">Нормально</option>
           <option class="hard">Сложно</option>
@@ -35,7 +35,8 @@ export default {
       buttons: [false, false, false, false],
       sequence: [],
       playerSequence: [],
-      level: 1,
+      level: 0,
+      selectedDifficulty: 'Легко',
       gameOver: false,
       difficulty: {
         easy: 1500,
@@ -47,16 +48,32 @@ export default {
   methods: {
     startGame() {
       this.gameOver = false
-      this.level = 1
+      this.level = 0
       this.nextTurn()
     },
     nextTurn() {
       this.playerSequence = []
       this.sequence.push(Math.floor(Math.random() * 4))
       this.playSequence(this.sequence)
+      this.level++
     },
     playSequence(sequence) {
       let i = 0
+      let difficultyLevel = this.difficulty['easy']
+
+      switch (this.selectedDifficulty) {
+        case 'Легко':
+          break
+        case 'Нормально':
+          difficultyLevel = this.difficulty['normal']
+          break
+        case 'Сложно':
+          difficultyLevel = this.difficulty['hard']
+          break
+        default:
+          break
+      }
+      console.log(difficultyLevel)
       const interval = setInterval(() => {
         this.activateButton(sequence[i])
         i++
@@ -66,7 +83,7 @@ export default {
             this.buttons = [false, false, false, false]
           }, 300)
         }
-      }, this.difficulty.easy)
+      }, difficultyLevel)
     },
     activateButton(index) {
       this.buttons = [false, false, false, false]
