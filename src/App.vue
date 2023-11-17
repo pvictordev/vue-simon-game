@@ -72,9 +72,40 @@ export default {
       this.buttons = [false, false, false, false]
       this.buttons[index] = true
       this.playSound(index)
+
+      const buttonElements = document.querySelectorAll('.button')
+      buttonElements[index].classList.add('active')
+
+      setTimeout(() => {
+        buttonElements[index].classList.remove('active')
+      }, this.difficulty.easy - 300)
     },
     playSound(index) {
       console.log(`Playing sound for button ${index}`)
+      let audioSrc = ''
+
+      switch (index) {
+        case 0:
+          audioSrc = 'https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'
+          break
+        case 1:
+          audioSrc = 'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'
+          break
+        case 2:
+          audioSrc = 'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'
+          break
+        case 3:
+          audioSrc = 'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'
+          break
+
+        default:
+          audioSrc = 'http://soundbible.com/mp3/Kids%20Cheering-SoundBible.com-681813822.mp3'
+          break
+      }
+
+      const audio = new Audio(audioSrc)
+
+      audio.play()
     },
     handleButtonClick(index) {
       if (!this.gameOver) {
