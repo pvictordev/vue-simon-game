@@ -5,7 +5,7 @@
       <h1 class="title">Simon The Game</h1>
       <div class="difficulty">
         <p>Сложность: {{ selectedDifficulty }}</p>
-        <select class="difficulty-buttons" v-model="selectedDifficulty">
+        <select class="difficulty-buttons" v-model="selectedDifficulty" @change="restartGame">
           <option class="easy">Легко</option>
           <option class="normal">Нормально</option>
           <option class="hard">Сложно</option>
@@ -51,6 +51,13 @@ export default {
       this.level = 0
       this.nextTurn()
     },
+    restartGame() {
+      this.gameOver = false
+      this.level = 0
+      this.sequence = []
+      this.playerSequence = []
+      this.nextTurn()
+    },
     nextTurn() {
       this.playerSequence = []
       this.sequence.push(Math.floor(Math.random() * 4))
@@ -73,7 +80,7 @@ export default {
         default:
           break
       }
-      console.log(difficultyLevel)
+
       const interval = setInterval(() => {
         this.activateButton(sequence[i])
         i++
