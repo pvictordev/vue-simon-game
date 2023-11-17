@@ -107,19 +107,29 @@ export default {
 
       audio.play()
     },
+
     handleButtonClick(index) {
       if (!this.gameOver) {
         this.activateButton(index)
         this.playerSequence.push(index)
-        const seqLength = this.sequence.length
-        if (this.playerSequence[seqLength - 1] !== this.sequence[seqLength - 1]) {
+
+        const isCorrectSequence = this.playerSequence.every(
+          (value, idx) => value === this.sequence[idx]
+        )
+
+        if (!isCorrectSequence) {
           this.gameOver = true
-        } else if (seqLength === this.playerSequence.length) {
+          this.endGame()
+        } else if (this.playerSequence.length === this.sequence.length) {
           setTimeout(() => {
             this.nextTurn()
           }, 1000)
         }
       }
+    },
+
+    endGame() {
+      this.gameOver = true
     }
   }
 }
